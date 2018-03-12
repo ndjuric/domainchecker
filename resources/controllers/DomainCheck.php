@@ -13,22 +13,23 @@ class DomainCheck
         return checkdnsrr($this->domain_name, 'ANY') ? true : false;
     }
 
-    function whois($domain_name) {
+    function whois($domain_name)
+    {
         $fp = fsockopen("whois.verisign-grs.com", 43);
         $out = "$domain_name\r\n";
         fwrite($fp, $out);
         $whois = '';
         while (!feof($fp)) {
-           $whois .= fgets($fp, 128);
+            $whois .= fgets($fp, 128);
         }
         if (strpos($whois, 'No match for') !== false) {
             $domain_parts = explode('.', $domain_name);
             $domain_size = count($domain_parts) - 1;
-            if($domain_size < 2) return false;
+            if ($domain_size < 2) return false;
             $new_domain = '';
-            for($i=1;$i<=$domain_size;$i++) {
+            for ($i = 1; $i <= $domain_size; $i++) {
                 $dot = '';
-                if($i < $domain_size) {
+                if ($i < $domain_size) {
                     $dot = '.';
                 }
                 $new_domain .= $domain_parts[$i] . $dot;

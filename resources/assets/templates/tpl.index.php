@@ -8,8 +8,9 @@
 
     <title>Domain Checker</title>
 
-    <link href="assets/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/custom.css" rel="stylesheet">
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/custom.css" rel="stylesheet">
+    <script src="assets/js/jquery-3.3.1.min.js"></script>
 </head>
 
 <body>
