@@ -7,6 +7,8 @@ spl_autoload_register(function ($className) {
         'Router' => '/api/',
         'Home' => '/api/',
 
+        'DomainCheck' => '/controllers/',
+
         'Template' => '/views/',
 
         'Logger' => '/system/'

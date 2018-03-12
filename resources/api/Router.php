@@ -15,14 +15,18 @@ class Router extends API
         // save tokens to memcached || ddos protection || access control per ip
     }
 
-    /* endpoint: http://puppy.local/api/test_endpoint?id=some_id */
-    protected function test_endpoint($body, $args)
+    /* endpoint: http://puppy.local/api/check_domain?id=some_id */
+    protected function check_domain($body, $args)
     {
         switch ($this->method) {
-            case "GET":
-                return ['get'];
             case "POST":
-                return ['post'];
+                if (!array_key_exists('domain_name', $body)) {
+                    return ['status' => false, 'message' => 'Mandatory field missing.'];
+                }
+                $domain_name = $body['domain_name'];
+                $domain_check = new DomainCheck($domain_name);
+                $domain_check->run();
+                return $domain_check->get_result();
             default:
                 return $this->invalidMethod();
         }
